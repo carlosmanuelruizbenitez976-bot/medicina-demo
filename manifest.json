@@ -1,11 +1,11 @@
 {
   "name": "Medicina Mi estudio",
   "short_name": "Medicina",
-  "start_url": ".",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#faf7fd",
   "theme_color": "#8467a8",
-  "description": "Siete materias, guías, quizzes, tareas y progreso para estudiar medicina.",
+  "description": "Medicina: guías, práctica, tareas y progreso. Disponible sin conexión después de descargar la app.",
   "orientation": "portrait-primary",
   "prefer_related_applications": false,
   "icons": [
@@ -31,5 +31,7 @@
       "type": "image/png",
       "purpose": "maskable"
     }
-  ]
+  ],
+  "id": "./",
+  "scope": "./"
 }

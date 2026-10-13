@@ -1,51 +1,37 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
   <base href="/medicina-demo/">
-
   <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="Tu espacio para estudiar medicina: siete materias, guías, quizzes, tareas y progreso a tu ritmo.">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="Tu espacio para estudiar medicina: siete materias, guías, quizzes, tareas y progreso a tu ritmo, también sin conexión.">
   <meta name="theme-color" content="#8467a8">
   <meta name="robots" content="noindex, nofollow">
-
-  <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="Medicina">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
-
+  <link rel="icon" type="image/png" href="favicon.png">
   <title>Medicina · Mi estudio</title>
   <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="offline.css">
 </head>
 <body>
-  <div id="loading" role="status" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#faf7fd;color:#745995;font:600 20px system-ui;text-align:center;padding:24px;">
-    <div><img src="icons/Icon-192.png" width="72" height="72" alt="" style="border-radius:20px;margin-bottom:16px;"><br>Preparando tu espacio de estudio…</div>
-  </div>
-  <!--
-    You can customize the "flutter_bootstrap.js" script.
-    This is useful to provide a custom configuration to the Flutter loader
-    or to give the user feedback during the initialization process.
-
-    For more details:
-    * https://docs.flutter.dev/platform-integration/web/initialization
-  -->
+  <header id="device-bar"><span id="device-status" role="status">Preparando uso sin conexión…</span><button id="device-open" type="button">Instalar app</button></header>
+  <main id="study-app" aria-label="Medicina · Mi estudio">
+    <div id="loading" role="status"><div><img src="icons/Icon-192.png" width="72" height="72" alt=""><br>Preparando tu espacio de estudio…</div></div>
+  </main>
+  <dialog id="device-dialog" aria-labelledby="device-title">
+    <header><img src="icons/Icon-192.png" width="52" height="52" alt=""><div><h1 id="device-title">Estudia donde estés</h1><p style="margin:4px 0 0">Medicina en tu iPhone</p></div></header>
+    <div class="notice"><strong id="download-status" role="status">Preparando la descarga…</strong><progress id="download-progress" hidden aria-label="Descarga sin conexión"></progress><p>Guías incluidas, cuestionarios, tareas, retos y progreso disponibles sin internet cuando termine la descarga.</p><div class="actions"><button id="retry-download">Reintentar descarga</button><button id="apply-update" hidden>Aplicar actualización</button></div></div>
+    <section id="install-help"><h2>Tu app en la pantalla de inicio</h2><ol><li>Abre este enlace en <strong>Safari</strong>.</li><li>Pulsa <strong>Compartir → Añadir a pantalla de inicio</strong>. Si aparece, activa <strong>Abrir como app web</strong>.</li><li>Abre Medicina desde el nuevo icono con internet y espera el mensaje <strong>Lista para usar sin conexión</strong>.</li></ol><p>No necesitas cable, AltStore ni modo desarrollador.</p></section>
+    <h2>Tu progreso, contigo</h2><p id="storage-status">Las notas y tareas se guardan en este dispositivo.</p>
+    <div class="actions"><button id="keep-storage">Conservar datos</button><button id="export-backup">Guardar copia</button><label class="file-button">Recuperar copia<input id="backup-file" type="file" accept=".json,application/json"></label></div><p id="backup-message" role="status"></p>
+    <h2>Lo que necesita internet</h2><p>Libros y páginas externas, búsquedas académicas y actualizaciones. Los recordatorios nativos del teléfono no están disponibles en esta versión.</p><p>El progreso de la app nativa anterior no se transfiere automáticamente. No la borres si necesitas conservarlo.</p>
+    <footer><button id="device-close" class="primary">Seguir estudiando</button></footer>
+  </dialog>
+  <script src="offline.js" defer></script>
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>

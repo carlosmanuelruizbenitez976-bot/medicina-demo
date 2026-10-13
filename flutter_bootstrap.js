@@ -42,9 +42,16 @@ _flutter.buildConfig = {"engineRevision":"692136cb6582dbfc5af3fb33c2515a069f2f66
 
 
 _flutter.loader.load({
+  config: {canvasKitVariant: 'full'},
   onEntrypointLoaded: async function(engineInitializer) {
-    const runner = await engineInitializer.initializeEngine();
-    document.getElementById('loading')?.remove();
-    await runner.runApp();
+    try {
+      const runner = await engineInitializer.initializeEngine({hostElement: document.getElementById('study-app'), canvasKitVariant: 'full'});
+      await runner.runApp();
+      document.getElementById('loading')?.remove();
+    } catch (error) {
+      const loading = document.getElementById('loading');
+      if (loading) loading.innerHTML = '<div>No se pudo abrir Medicina.<br>Conéctate a internet para completar la primera descarga.<br><button onclick="location.reload()">Volver a intentar</button></div>';
+      console.error('Medicina initialization failed', error);
+    }
   }
 });
